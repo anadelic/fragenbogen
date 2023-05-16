@@ -4,11 +4,11 @@ import { questions } from '../util/database';
 
 export default function NewIteration() {
   const [name, setName] = useState('');
-  const [date, setDate] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
 
-  const handleNextQuestion = (answerOption) => {
+  // changing questions with state
+  const handleNextQuestion = () => {
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
@@ -17,31 +17,33 @@ export default function NewIteration() {
     }
   };
 
-  const handleAnswerChange = (answerIndex) => {
+  // reseting the questionary
+  const handleReset = () => {
+    setCurrentQuestion(0);
+    setAnswers([]);
+  };
+
+  const handleAnswerChange = (answerText) => {
     const updatedAnswers = [...answers];
-    const answerIndexInArray = updatedAnswers.indexOf(answerIndex);
-    if (answerIndexInArray !== -1) {
-      updatedAnswers.splice(answerIndexInArray, 1);
-    } else {
-      updatedAnswers.push(answerIndex);
-    }
+    updatedAnswers.push(answerText);
     setAnswers(updatedAnswers);
   };
+  // get current date
+  const currentDate = new Date().toLocaleDateString();
 
-  // saving to the local storage
-  const saveAnswers = () => {
-    const data = {
+  // saving to the local storage and adding timestamp so I can delete single ones after
+  const handleSave = () => {
+    const iterationData = {
+      id: Date.now(),
       name: name,
-      date: date,
+      date: currentDate,
       answers: answers,
     };
+    const savedIterations =
+      JSON.parse(localStorage.getItem('questionary')) || [];
+    savedIterations.push(iterationData);
 
-    localStorage.setItem('questionary', JSON.stringify(data));
-  };
-
-  // deleting from local storage
-  const deleteData = () => {
-    localStorage.removeItem(answers);
+    localStorage.setItem('questionary', JSON.stringify(savedIterations));
   };
 
   return (
@@ -57,18 +59,6 @@ export default function NewIteration() {
           />
         </label>
       </p>
-      <p>
-        <label htmlFor="date">
-          Date:
-          <input
-            name="date"
-            type="date"
-            required
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </label>
-      </p>
-
       <h1>Questions</h1>
       <div className="question-text">
         {questions[currentQuestion].questionText}
@@ -79,15 +69,16 @@ export default function NewIteration() {
             {answerOption.answerText}
             <input
               type="checkbox"
-              checked={answers.includes(index)}
-              onChange={() => handleAnswerChange(index)}
+              checked={answers.includes(answerOption.answerText)}
+              onChange={() => handleAnswerChange(answerOption.answerText)}
             />
           </label>
         ))}
       </div>
 
       <button onClick={handleNextQuestion}>Next Question</button>
-      <button onClick={saveAnswers}>Save</button>
+      <button onClick={handleReset}>Reset</button>
+      <button onClick={handleSave}>Save</button>
 
       <Link to="/">Go back to Home Page</Link>
     </div>
