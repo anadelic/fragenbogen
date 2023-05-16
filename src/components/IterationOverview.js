@@ -1,23 +1,44 @@
-export default function IterationsOverview() {
-  // get data from the local storage
+import { useEffect, useState } from 'react';
 
-  //get data
-  const getData = () => {
-    const data = localStorage.getItem('questionary');
-    return JSON.parse(data);
-  };
-  const data = getData();
+export default function IterationsOverview() {
+  const [data, setData] = useState([]);
+
+  // Getting data from the local storage, if there is no data setting to an empty array
+  useEffect(() => {
+    const storedData = localStorage.getItem('questionary');
+    setData(JSON.parse(storedData) || []);
+  }, []);
+
+  // Delete an iteration by ID
+  function deleteIteration(iterationId) {
+    const updatedData = data.filter(
+      (iteration) => iteration.id !== iterationId,
+    );
+    setData(updatedData);
+    // updating local storage after deleting
+    localStorage.setItem('questionary', JSON.stringify(updatedData));
+  }
+
   return (
-    <div>
-      <h2>Iterations Overview</h2>
-      <p>Iteration name: {data.name}</p>
-      <p>Iteration date: {data.date} </p>
-      <p>Answers:</p>
-      <ul>
-        {data.answers.map((answer, index) => (
-          <li key={index}>{answer}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      {data.length === 0 ? (
+        <p>There are no iterations</p>
+      ) : (
+        <div>
+          <h2>Iterations Overview</h2>
+          {data.map((iteration) => (
+            <div key={iteration.id}>
+              <p>Iteration {iteration.id}</p>
+              <p>Name: {iteration.name}</p>
+              <p>Date: {iteration.date}</p>
+              <p>Answers: {iteration.answers.join(', ')}</p>
+              <button onClick={() => deleteIteration(iteration.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
