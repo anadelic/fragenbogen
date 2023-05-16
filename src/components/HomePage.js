@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import IterationsOverview from './IterationOverview';
 
 export default function HomePage() {
   return (
@@ -7,7 +8,7 @@ export default function HomePage() {
       <Link to="newIteration">
         <button>New Iteration</button>
       </Link>
-      <h2>Iterations overview</h2>
+      <IterationsOverview />
     </div>
   );
 }
