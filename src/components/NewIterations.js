@@ -50,7 +50,9 @@ export default function NewIteration() {
   };
 
   // Diasbling the button until user checks at least one answer
-  const isAnswerChecked = answers.length > 0;
+  const isAnswerChecked = questions[currentQuestion].answerOptions.some(
+    (answerOption) => answers.includes(answerOption.answerText),
+  );
 
   const handleNotCompleted = () => {
     const iterationData = {
@@ -66,7 +68,6 @@ export default function NewIteration() {
 
     localStorage.setItem('questionary', JSON.stringify(savedIterations));
   };
-
   return (
     <div>
       <h1>New questionary</h1>
