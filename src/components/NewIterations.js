@@ -23,11 +23,13 @@ export default function NewIteration() {
     setAnswers([]);
   };
 
+  // making a copy of an answer array and updating with new ones, updating original answers array.
   const handleAnswerChange = (answerText) => {
     const updatedAnswers = [...answers];
     updatedAnswers.push(answerText);
     setAnswers(updatedAnswers);
   };
+
   // get current date
   const currentDate = new Date().toLocaleDateString();
 
@@ -38,6 +40,25 @@ export default function NewIteration() {
       name: name,
       date: currentDate,
       answers: answers,
+      status: 'completed',
+    };
+    const savedIterations =
+      JSON.parse(localStorage.getItem('questionary')) || [];
+    savedIterations.push(iterationData);
+
+    localStorage.setItem('questionary', JSON.stringify(savedIterations));
+  };
+
+  // Diasbling the button until user checks at least one answer
+  const isAnswerChecked = answers.length > 0;
+
+  const handleNotCompleted = () => {
+    const iterationData = {
+      id: Date.now(),
+      name: name,
+      date: currentDate,
+      answers: answers,
+      status: 'not completed',
     };
     const savedIterations =
       JSON.parse(localStorage.getItem('questionary')) || [];
@@ -76,11 +97,15 @@ export default function NewIteration() {
         ))}
       </div>
 
-      <button onClick={handleNextQuestion}>Next Question</button>
+      <button onClick={handleNextQuestion} disabled={!isAnswerChecked}>
+        Next Question
+      </button>
       <button onClick={handleReset}>Reset</button>
       <button onClick={handleSave}>Save</button>
 
-      <Link to="/">Go back to Home Page</Link>
+      <Link to="/" onClick={handleNotCompleted}>
+        Go back to Home Page
+      </Link>
     </div>
   );
 }
