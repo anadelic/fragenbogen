@@ -28,7 +28,7 @@ export default function IterationsOverview() {
           <h2>Iterations Overview</h2>
           {data.map((iteration) => (
             <div key={iteration.id}>
-              <p>Iteration {iteration.id}</p>
+              <p>Iteration {iteration.status}</p>
               <p>Name: {iteration.name}</p>
               <p>Date: {iteration.date}</p>
               <p>Answers: {iteration.answers.join(', ')}</p>
