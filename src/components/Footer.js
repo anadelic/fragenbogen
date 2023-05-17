@@ -1,3 +1,8 @@
 export const Footer = () => {
-  return <p>This is footer</p>;
+  return (
+    <footer className="footer">
+      Copyright <span>Quiz</span>
+      {new Date().getFullYear()}
+    </footer>
+  );
 };
