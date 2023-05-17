@@ -93,6 +93,23 @@
   transition-duration: 0.5s;
 }
 
+.answers-btn {
+  padding: 8px 16px;
+  background-color: #5762d5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-right: 16px;
+}
+
+.answers-btn:hover {
+  background-color: #7b8bd9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition-duration: 0.5s;
+}
+
 /* new iteration page */
 
 .newIterationPage {

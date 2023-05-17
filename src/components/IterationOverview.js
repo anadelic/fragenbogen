@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 export default function IterationsOverview() {
   const [data, setData] = useState([]);
+  const [showAnswers, setShowAnswers] = useState(false);
 
   // Getting data from the local storage, if there is no data setting to an empty array
   useEffect(() => {
@@ -30,7 +31,13 @@ export default function IterationsOverview() {
               <p className="iteration-status">Iteration {iteration.status}</p>
               <p>Name: {iteration.name}</p>
               <p>Date: {iteration.date}</p>
-              <p>Answers: {iteration.answers.join(', ')}</p>
+              {showAnswers && <p>Answers: {iteration.answers.join(', ')}</p>}
+              <button
+                className="answers-btn"
+                onClick={() => setShowAnswers(!showAnswers)}
+              >
+                {showAnswers ? 'Hide Answers' : 'Show Answers'}
+              </button>
               <button
                 className="delete-btn"
                 onClick={() => deleteIteration(iteration.id)}
