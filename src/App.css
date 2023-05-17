@@ -10,23 +10,27 @@
 }
 
 .header h1 {
-  color: #333;
+  color: #2e2d2d;
   font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
 }
 
 .iteration-btn {
   padding: 10px 20px;
-  background-color: rgb(18, 156, 18);
+  background-color: #5762d5;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .iteration-btn:hover {
-  background-color: #ddd;
+  background-color: #7b8bd9;
   transition-duration: 0.5s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* style footer */
@@ -74,14 +78,92 @@
 }
 
 .delete-btn {
-  background-color: #e74c3c;
+  background-color: #ff8600;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 8px 16px;
   cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .delete-btn:hover {
-  background-color: #c0392b;
+  background-color: #ff9c36;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition-duration: 0.5s;
+}
+
+/* new iteration page */
+
+.newIterationPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+}
+
+.newIterationPage h1 {
+  margin-top: 60px;
+}
+
+.input {
+  width: 100%;
+  padding: 6px;
+  font-size: 16px;
+  margin-top: 6px;
+}
+.btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #5762d5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 10px;
+  border-radius: 0.5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-reset {
+  padding: 8px 16px;
+  background-color: #ff8600;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 0.5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 10px 0px;
+}
+
+.btn-reset:hover {
+  background-color: #ff9c36;
+  transition-duration: 0.5s;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.checkbox {
+  margin: 10px 8px;
+}
+
+.link {
+  display: block;
+  margin-top: 20px;
+  font-size: 16px;
+  color: blue;
+  text-decoration: underline;
 }

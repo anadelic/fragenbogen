@@ -81,27 +81,29 @@ export default function NewIteration() {
     }
   };
   return (
-    <div>
-      <h1>New questionary</h1>
+    <div className="newIterationPage">
+      <h1>Start a New Questionnaire</h1>
       <p>
-        <label htmlFor="title">
+        <label htmlFor="title" className="inputLabel">
           Name:
           <input
+            className="input"
             name="title"
             required
             onChange={(e) => setName(e.target.value)}
           />
         </label>
       </p>
-      <h1>Questions</h1>
+
       <div className="question-text">
         {questions[currentQuestion].questionText}
       </div>
       <div className="answer-section">
         {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-          <label key={index}>
+          <label className="checkboxLabel" key={index}>
             {answerOption.answerText}
             <input
+              className="checkbox"
               type="checkbox"
               checked={answers.includes(answerOption.answerText)}
               onChange={() => handleAnswerChange(answerOption.answerText)}
@@ -109,15 +111,27 @@ export default function NewIteration() {
           </label>
         ))}
       </div>
-      <button onClick={handleReset}>Reset</button>
-      <button onClick={handleNextQuestion} disabled={!isAnswerChecked}>
-        Next Question
-      </button>
-      <button onClick={handleSave} disabled={!isAllQuestionsAnswered}>
-        Save
-      </button>
+      <div>
+        <button className="btn-reset" onClick={handleReset}>
+          Reset
+        </button>
+        <button
+          className="btn"
+          onClick={handleNextQuestion}
+          disabled={!isAnswerChecked}
+        >
+          Next Question
+        </button>
+        <button
+          className="btn"
+          onClick={handleSave}
+          disabled={!isAllQuestionsAnswered}
+        >
+          Save
+        </button>
+      </div>
 
-      <Link to="/" onClick={handleNotCompleted}>
+      <Link to="/" onClick={handleNotCompleted} className="link">
         Go back to Home Page
       </Link>
     </div>

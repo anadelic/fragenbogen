@@ -13,7 +13,7 @@ export const questions = [
   {
     id: 2,
     questionText:
-      'Which planets are featured in the original Star Wars trilogy? (Select all that apply)',
+      'Which planets are featured in the original Star Wars trilogy?',
     answerOptions: [
       { id: 1, answerText: 'Tatooine' },
       { id: 2, answerText: 'Endor' },
@@ -24,7 +24,7 @@ export const questions = [
   {
     id: 3,
     questionText:
-      'Which of the following Star Wars movies were directed by George Lucas? (Select all that apply)',
+      'Which of the following Star Wars movies were directed by George Lucas?',
     answerOptions: [
       { id: 1, answerText: 'The Empire Strikes Back' },
       { id: 2, answerText: 'The Phantom Menace' },
