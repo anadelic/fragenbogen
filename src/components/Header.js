@@ -1,6 +1,12 @@
-export const Header = () => {
+import { Link } from 'react-router-dom';
 
-  return(
-    <h1>This is header</h1>
-  )
-}
+export const Header = () => {
+  return (
+    <div className="header">
+      <p>Star Wars Quiz App</p>
+      <Link to="newIteration">
+        <button className="iteration-btn">New Iteration</button>
+      </Link>
+    </div>
+  );
+};
