@@ -24,15 +24,17 @@ export default function IterationsOverview() {
       {data.length === 0 ? (
         <p>There are no iterations</p>
       ) : (
-        <div>
-          <h2>Iterations Overview</h2>
+        <div className="iterations">
           {data.map((iteration) => (
-            <div key={iteration.id}>
-              <p>Iteration {iteration.status}</p>
+            <div className="iteration-card" key={iteration.id}>
+              <p className="iteration-status">Iteration {iteration.status}</p>
               <p>Name: {iteration.name}</p>
               <p>Date: {iteration.date}</p>
               <p>Answers: {iteration.answers.join(', ')}</p>
-              <button onClick={() => deleteIteration(iteration.id)}>
+              <button
+                className="delete-btn"
+                onClick={() => deleteIteration(iteration.id)}
+              >
                 Delete
               </button>
             </div>
