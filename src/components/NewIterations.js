@@ -13,7 +13,7 @@ export default function NewIteration() {
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
-      alert('you reached the end of the questionary');
+      alert("You've reached the end of the questionnaire.");
     }
   };
 
@@ -21,6 +21,7 @@ export default function NewIteration() {
   const handleReset = () => {
     setCurrentQuestion(0);
     setAnswers([]);
+    setName('');
   };
 
   // making a copy of an answer array and updating with new ones, updating original answers array.
@@ -50,15 +51,19 @@ export default function NewIteration() {
     localStorage.setItem('questionary', JSON.stringify(savedIterations));
   };
 
-  // Diasbling the button until user checks at least one answer
+  // Diasbling next button until user checks at least one answer
   const isAnswerChecked = questions[currentQuestion].answerOptions.some(
     (answerOption) => answers.includes(answerOption.answerText),
   );
 
-  // Diasbling save button until all questions are answered
-  const isAllQuestionsAnswered = questions.every(
-    (question, index) => answers[index] !== undefined,
-  );
+  // Diasbling save button until all questions are answered, iterate over each question, checks if at least one answer option is included in the array, checks if the answers array includes some answerText
+  const areAllQuestionsAnswered = () => {
+    return questions.every((question) => {
+      return question.answerOptions.some((answerOption) =>
+        answers.includes(answerOption.answerText),
+      );
+    });
+  };
 
   const handleNotCompleted = () => {
     if (
@@ -120,19 +125,19 @@ export default function NewIteration() {
           onClick={handleNextQuestion}
           disabled={!isAnswerChecked}
         >
-          Next Question
+          Next
         </button>
         <button
           className="btn"
           onClick={handleSave}
-          disabled={!isAllQuestionsAnswered}
+          disabled={!areAllQuestionsAnswered() || !isAnswerChecked}
         >
           Save
         </button>
       </div>
 
       <Link to="/" onClick={handleNotCompleted} className="link">
-        Go back to Home Page
+        Back to Homepage
       </Link>
     </div>
   );
