@@ -42,6 +42,7 @@ export default function NewIteration() {
       answers: answers,
       status: 'completed',
     };
+
     const savedIterations =
       JSON.parse(localStorage.getItem('questionary')) || [];
     savedIterations.push(iterationData);
@@ -54,10 +55,16 @@ export default function NewIteration() {
     (answerOption) => answers.includes(answerOption.answerText),
   );
 
+  // Diasbling save button until all questions are answered
+  const isAllQuestionsAnswered = questions.every(
+    (question, index) => answers[index] !== undefined,
+  );
+
   const handleNotCompleted = () => {
     if (
-      currentQuestion < questions.length - 1 ||
-      answers.length < questions.length
+      (currentQuestion < questions.length - 1 ||
+        answers.length < questions.length) &&
+      answers.length !== 0
     ) {
       const iterationData = {
         id: Date.now(),
@@ -102,12 +109,13 @@ export default function NewIteration() {
           </label>
         ))}
       </div>
-
+      <button onClick={handleReset}>Reset</button>
       <button onClick={handleNextQuestion} disabled={!isAnswerChecked}>
         Next Question
       </button>
-      <button onClick={handleReset}>Reset</button>
-      <button onClick={handleSave}>Save</button>
+      <button onClick={handleSave} disabled={!isAllQuestionsAnswered}>
+        Save
+      </button>
 
       <Link to="/" onClick={handleNotCompleted}>
         Go back to Home Page
