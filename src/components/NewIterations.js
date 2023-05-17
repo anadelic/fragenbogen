@@ -55,18 +55,23 @@ export default function NewIteration() {
   );
 
   const handleNotCompleted = () => {
-    const iterationData = {
-      id: Date.now(),
-      name: name,
-      date: currentDate,
-      answers: answers,
-      status: 'not completed',
-    };
-    const savedIterations =
-      JSON.parse(localStorage.getItem('questionary')) || [];
-    savedIterations.push(iterationData);
+    if (
+      currentQuestion < questions.length - 1 ||
+      answers.length < questions.length
+    ) {
+      const iterationData = {
+        id: Date.now(),
+        name: name,
+        date: currentDate,
+        answers: answers,
+        status: 'not completed',
+      };
+      const savedIterations =
+        JSON.parse(localStorage.getItem('questionary')) || [];
+      savedIterations.push(iterationData);
 
-    localStorage.setItem('questionary', JSON.stringify(savedIterations));
+      localStorage.setItem('questionary', JSON.stringify(savedIterations));
+    }
   };
   return (
     <div>
