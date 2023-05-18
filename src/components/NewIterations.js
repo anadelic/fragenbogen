@@ -1,11 +1,17 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { questions } from '../util/database';
 
 export default function NewIteration() {
   const [name, setName] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
+  const [showInput, setShowInput] = useState(false);
+  const navigate = useNavigate();
+
+  const nextBtn = () => {
+    setShowInput(true);
+  };
 
   // changing questions with state
   const handleNextQuestion = () => {
@@ -22,6 +28,7 @@ export default function NewIteration() {
     setCurrentQuestion(0);
     setAnswers([]);
     setName('');
+    setShowInput(false);
   };
 
   // making a copy of an answer array and updating with new ones, updating original answers array.
@@ -49,6 +56,7 @@ export default function NewIteration() {
     savedIterations.push(iterationData);
 
     localStorage.setItem('questionary', JSON.stringify(savedIterations));
+    navigate('/');
   };
 
   // Diasbling next button until user checks at least one answer
@@ -88,57 +96,68 @@ export default function NewIteration() {
   return (
     <div className="newIterationPage">
       <h1>Start a New Questionnaire</h1>
-      <p>
-        <label htmlFor="title" className="inputLabel">
-          Name:
-          <input
-            className="input"
-            name="title"
-            required
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-      </p>
-
-      <div className="question-text">
-        {questions[currentQuestion].questionText}
-      </div>
-      <div className="answer-section">
-        {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-          <label className="checkboxLabel" key={index}>
-            {answerOption.answerText}
+      {!showInput ? (
+        <p>
+          <label htmlFor="title" className="inputLabel">
+            Name:
             <input
-              className="checkbox"
-              type="checkbox"
-              checked={answers.includes(answerOption.answerText)}
-              onChange={() => handleAnswerChange(answerOption.answerText)}
+              className="input"
+              name="title"
+              required
+              onChange={(e) => setName(e.target.value)}
             />
           </label>
-        ))}
-      </div>
-      <div>
+          <button onClick={nextBtn} className="next-btn">
+            Next
+          </button>
+        </p>
+      ) : (
+        <div>
+          <div className="question-text">
+            {questions[currentQuestion].questionText}
+          </div>
+          <div className="answer-section">
+            {questions[currentQuestion].answerOptions.map(
+              (answerOption, index) => (
+                <label className="checkboxLabel" key={index}>
+                  {answerOption.answerText}
+                  <input
+                    className="checkbox"
+                    type="checkbox"
+                    checked={answers.includes(answerOption.answerText)}
+                    onChange={() => handleAnswerChange(answerOption.answerText)}
+                  />
+                </label>
+              ),
+            )}
+          </div>
+          <div>
+            <button
+              className="btn"
+              onClick={handleNextQuestion}
+              disabled={!isAnswerChecked}
+            >
+              Next Question
+            </button>
+            <button
+              className="btn"
+              onClick={handleSave}
+              disabled={!areAllQuestionsAnswered() || !isAnswerChecked}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      )}
+      <div className="link-btn">
         <button className="btn-reset" onClick={handleReset}>
           Reset
         </button>
-        <button
-          className="btn"
-          onClick={handleNextQuestion}
-          disabled={!isAnswerChecked}
-        >
-          Next
-        </button>
-        <button
-          className="btn"
-          onClick={handleSave}
-          disabled={!areAllQuestionsAnswered() || !isAnswerChecked}
-        >
-          Save
-        </button>
-      </div>
 
-      <Link to="/" onClick={handleNotCompleted} className="link">
-        Back to Homepage
-      </Link>
+        <Link to="/" onClick={handleNotCompleted} className="link">
+          Back to Homepage
+        </Link>
+      </div>
     </div>
   );
 }
