@@ -9,7 +9,8 @@ export default function NewIteration() {
   const [showInput, setShowInput] = useState(false);
   const navigate = useNavigate();
 
-  const nextBtn = () => {
+  const nextBtn = (e) => {
+    e.preventDefault();
     setShowInput(true);
   };
 
@@ -97,20 +98,20 @@ export default function NewIteration() {
     <div className="newIterationPage">
       <h1>Start a New Questionnaire</h1>
       {!showInput ? (
-        <p>
-          <label htmlFor="title" className="inputLabel">
-            Name:
-            <input
-              className="input"
-              name="title"
-              required
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <button onClick={nextBtn} className="next-btn">
-            Next
-          </button>
-        </p>
+        <form onSubmit={nextBtn}>
+          <p>
+            <label htmlFor="title" className="inputLabel">
+              Name:
+              <input
+                className="input"
+                name="title"
+                required
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
+            <button className="next-btn">Next</button>
+          </p>
+        </form>
       ) : (
         <div>
           <div className="question-text">
