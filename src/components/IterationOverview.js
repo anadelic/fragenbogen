@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export default function IterationsOverview() {
   const [data, setData] = useState([]);
-  const [showAnswers, setShowAnswers] = useState(false);
+  const [showAnswers, setShowAnswers] = useState([]);
 
   // Getting data from the local storage, if there is no data setting to an empty array
   useEffect(() => {
@@ -20,6 +20,17 @@ export default function IterationsOverview() {
     localStorage.setItem('questionary', JSON.stringify(updatedData));
   }
 
+  //checks if the current state of the showAnswers array includes iterationId
+  function showAndHideAnswers(iterationId) {
+    setShowAnswers((currState) => {
+      if (currState.includes(iterationId)) {
+        return currState.filter((id) => id !== iterationId);
+      } else {
+        return [...currState, iterationId];
+      }
+    });
+  }
+
   return (
     <>
       {data.length === 0 ? (
@@ -28,15 +39,19 @@ export default function IterationsOverview() {
         <div className="iterations">
           {data.map((iteration) => (
             <div className="iteration-card" key={iteration.id}>
-              <p className="iteration-status">Iteration {iteration.status}</p>
+              <p>Status: {iteration.status}</p>
               <p>Name: {iteration.name}</p>
               <p>Date: {iteration.date}</p>
-              {showAnswers && <p>Answers: {iteration.answers.join(', ')}</p>}
+              {showAnswers.includes(iteration.id) && (
+                <p>Answers: {iteration.answers.join(', ')}</p>
+              )}
               <button
                 className="answers-btn"
-                onClick={() => setShowAnswers(!showAnswers)}
+                onClick={() => showAndHideAnswers(iteration.id)}
               >
-                {showAnswers ? 'Hide Answers' : 'Show Answers'}
+                {showAnswers.includes(iteration.id)
+                  ? 'Hide Answers'
+                  : 'Show Answers'}
               </button>
               <button
                 className="delete-btn"
