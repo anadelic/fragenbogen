@@ -117,6 +117,7 @@
   flex-direction: column;
   align-items: center;
   height: 90vh;
+  justify-content: center;
 }
 
 .newIterationPage h1 {
@@ -131,7 +132,7 @@
 }
 .btn {
   padding: 8px 16px;
-  font-size: 16px;
+  font-size: 1rem;
   background-color: #5762d5;
   color: #fff;
   border: none;
@@ -150,7 +151,7 @@
 .btn-reset {
   padding: 8px 16px;
   background-color: #ff8600;
-  font-size: 16px;
+  font-size: 1rem;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -158,7 +159,7 @@
   margin-right: 10px;
   border-radius: 0.5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  margin: 10px 0px;
+  margin: 10px 16px;
 }
 
 .btn-reset:hover {
@@ -170,7 +171,7 @@
   display: flex;
   align-items: center;
   margin: 10px 0;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .checkbox {
@@ -180,7 +181,26 @@
 .link {
   display: block;
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 1rem;
   color: blue;
   text-decoration: underline;
+}
+
+.next-btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: #5762d5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 10px;
+  border-radius: 0.5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.link-btn {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
 }
