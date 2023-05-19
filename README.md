@@ -11,14 +11,19 @@ This web app allows users to answer questions in multiple iterations, with the a
 
 ## Getting Started
 
-1. Clone the repository: `code` git clone https://github.com/anadelic/fragenbogen.git
+1. Clone the repository: ```shell
+   git clone https://github.com/your/repository.git
 
-2. Install the dependencies: `code` yarn
+2. Install the dependencies: yarn
 
-3. Start the development server: `code` yarn start
+3. Start the development server: yarn start
 
 ### Technologies Used
 
 - React.js
 - CSS
 - Local Storage
+
+### Project Tested with Playwright for End-to-End Testing
+
+To run the tests: yarn playwright test
