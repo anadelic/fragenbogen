@@ -1,0 +1,33 @@
+TABLE: ITERATION
+1. iteration_id
+2. title
+3. creation_date
+4. status
+
+
+TABLE: QUESTION
+1. question_id
+2. question_text
+3. iteration_id
+
+TABLE: ANSWER
+1. answer_id
+2. answer_text
+2. iteration_id
+3. question_id
+
+
+Create:
+POST request to create a new iteration.
+body: title, date, name, answers, status
+
+Read:
+GET request to retrieve a list of all iterations.
+GET request to retrieve a iteration by ID
+GET request to retrieve the answers.
+GET request to retrieve the all questions
+
+Delete:
+DELETE request to remove an iteration by ID and its answers.
+
+Requests would be made to appropriate API endpoints.
