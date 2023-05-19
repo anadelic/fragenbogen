@@ -1,5 +1,4 @@
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
-import { Footer } from './Footer';
 import { Header } from './Header';
 import HomePage from './HomePage';
 import NewIteration from './NewIterations';
@@ -10,7 +9,6 @@ export default function Router() {
       <>
         <Header />
         <Outlet />
-        <Footer />
       </>
     );
   };
