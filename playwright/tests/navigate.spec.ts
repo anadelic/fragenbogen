@@ -17,5 +17,7 @@ test('test', async ({ page }) => {
     dialog.dismiss().catch(() => {});
   });
   await page.getByRole('button', { name: 'Next Question' }).click();
-  await page.getByRole('button', { name: 'Save' }).click();
+  await page.getByRole('button', { name: 'Show Answers' }).click();
+  await page.getByRole('button', { name: 'Hide Answers' }).click();
+  await page.getByRole('button', { name: 'Delete' }).click();
 });
