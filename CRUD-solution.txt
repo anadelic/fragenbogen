@@ -4,7 +4,6 @@ TABLE: ITERATION
 3. creation_date
 4. status
 
-
 TABLE: QUESTION
 1. question_id
 2. question_text
@@ -29,5 +28,7 @@ GET request to retrieve the all questions
 
 Delete:
 DELETE request to remove an iteration by ID and its answers.
+(delete request for all iterations would be a highly destructive)
+
 
 Requests would be made to appropriate API endpoints.
