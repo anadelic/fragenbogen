@@ -56,8 +56,8 @@ export default function IterationsOverview() {
               {showAnswers.includes(iteration.id) && (
                 <div className="answers">
                   <p>Answers:</p>
-                  {iteration.answers.map((answer) => (
-                    <p key={`answer-${answer.id}`}>{answer}</p>
+                  {iteration.answers.map((answer, index) => (
+                    <p key={index}>{answer}</p>
                   ))}
                 </div>
               )}
