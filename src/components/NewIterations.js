@@ -9,7 +9,7 @@ export default function NewIteration() {
   const [showInput, setShowInput] = useState(false);
   const navigate = useNavigate();
 
-  const nextBtn = (e) => {
+  const handleNextBtn = (e) => {
     e.preventDefault();
     setShowInput(true);
   };
@@ -20,11 +20,15 @@ export default function NewIteration() {
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
-      alert("You've reached the end of the questionnaire.");
+      if (answers.length > 0) {
+        handleSave();
+        alert("You've reached the end of the questionnaire.");
+      }
+      navigate('/');
     }
   };
 
-  // reseting the questionary
+  // reseting the questionnaire
   const handleReset = () => {
     setCurrentQuestion(0);
     setAnswers([]);
@@ -66,13 +70,13 @@ export default function NewIteration() {
   );
 
   // Diasbling save button until all questions are answered, iterate over each question, checks if at least one answer option is included in the array, checks if the answers array includes some answerText
-  const areAllQuestionsAnswered = () => {
-    return questions.every((question) => {
-      return question.answerOptions.some((answerOption) =>
-        answers.includes(answerOption.answerText),
-      );
-    });
-  };
+  // const areAllQuestionsAnswered = () => {
+  //   return questions.every((question) => {
+  //     return question.answerOptions.some((answerOption) =>
+  //       answers.includes(answerOption.answerText),
+  //     );
+  //   });
+  // };
 
   const handleNotCompleted = () => {
     if (
@@ -96,43 +100,47 @@ export default function NewIteration() {
   };
   return (
     <div className="newIterationPage">
-      <h1>Start a New Questionnaire</h1>
+      <h1 className="title">Start a New Questionnaire</h1>
       {!showInput ? (
-        <form onSubmit={nextBtn}>
-          <p>
+        <form onSubmit={handleNextBtn}>
+          <div className="form-input">
             <label htmlFor="title" className="inputLabel">
-              Name:
               <input
                 className="input"
                 name="title"
                 required
+                placeholder="Enter the name"
                 onChange={(e) => setName(e.target.value)}
               />
             </label>
             <button className="next-btn">Next</button>
-          </p>
+          </div>
         </form>
       ) : (
         <div>
-          <div className="question-text">
-            {questions[currentQuestion].questionText}
-          </div>
-          <div className="answer-section">
-            {questions[currentQuestion].answerOptions.map(
-              (answerOption, index) => (
-                <label className="checkboxLabel" key={index}>
-                  {answerOption.answerText}
-                  <input
-                    className="checkbox"
-                    type="checkbox"
-                    checked={answers.includes(answerOption.answerText)}
-                    onChange={() => handleAnswerChange(answerOption.answerText)}
-                  />
-                </label>
-              ),
-            )}
-          </div>
           <div>
+            <div className="question-text">
+              {questions[currentQuestion].questionText}
+            </div>
+            <div className="answer-section">
+              {questions[currentQuestion].answerOptions.map(
+                (answerOption, index) => (
+                  <label className="checkboxLabel" key={index}>
+                    {answerOption.answerText}
+                    <input
+                      className="checkbox"
+                      type="checkbox"
+                      checked={answers.includes(answerOption.answerText)}
+                      onChange={() =>
+                        handleAnswerChange(answerOption.answerText)
+                      }
+                    />
+                  </label>
+                ),
+              )}
+            </div>
+          </div>
+          <div className="btn-group">
             <button
               className="btn"
               onClick={handleNextQuestion}
@@ -140,21 +148,21 @@ export default function NewIteration() {
             >
               Next Question
             </button>
-            <button
+            {/* <button
               className="btn"
               onClick={handleSave}
               disabled={!areAllQuestionsAnswered() || !isAnswerChecked}
             >
               Save
-            </button>
+            </button> */}
           </div>
         </div>
       )}
+
       <div className="link-btn">
         <button className="btn-reset" onClick={handleReset}>
           Reset
         </button>
-
         <Link to="/" onClick={handleNotCompleted} className="link">
           Back to Homepage
         </Link>
