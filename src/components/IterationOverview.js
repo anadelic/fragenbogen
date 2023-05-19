@@ -38,12 +38,28 @@ export default function IterationsOverview() {
       ) : (
         <div className="iterations">
           {data.map((iteration) => (
-            <div className="iteration-card" key={iteration.id}>
-              <p>Status: {iteration.status}</p>
-              <p>Name: {iteration.name}</p>
-              <p>Date: {iteration.date}</p>
+            <div
+              className="iteration-container"
+              key={`iteration-${iteration.id}`}
+            >
+              <div className="iteration-card">
+                <p>Status: {iteration.status}</p>
+                <p>Name: {iteration.name}</p>
+                <p>Date: {iteration.date}</p>
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteIteration(iteration.id)}
+                >
+                  Delete
+                </button>
+              </div>
               {showAnswers.includes(iteration.id) && (
-                <p>Answers: {iteration.answers.join(', ')}</p>
+                <div className="answers">
+                  <p>Answers:</p>
+                  {iteration.answers.map((answer) => (
+                    <p key={`answer-${answer.id}`}>{answer}</p>
+                  ))}
+                </div>
               )}
               <button
                 className="answers-btn"
@@ -53,16 +69,14 @@ export default function IterationsOverview() {
                   ? 'Hide Answers'
                   : 'Show Answers'}
               </button>
-              <button
-                className="delete-btn"
-                onClick={() => deleteIteration(iteration.id)}
-              >
-                Delete
-              </button>
             </div>
           ))}
         </div>
       )}
+      <footer className="footer">
+        Copyright <span>Quiz</span>
+        {new Date().getFullYear()}
+      </footer>
     </>
   );
 }
