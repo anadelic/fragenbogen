@@ -13,4 +13,5 @@ body {
   color: var(--main-text-color);
   line-height: 0.5;
   margin: 0;
+  text-align: center;
 }
