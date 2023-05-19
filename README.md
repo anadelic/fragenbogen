@@ -11,12 +11,19 @@ This web app allows users to answer questions in multiple iterations, with the a
 
 ## Getting Started
 
-1. Clone the repository: ```shell
-   git clone https://github.com/your/repository.git
+1. Clone the repository and install all dependencies
 
-2. Install the dependencies: yarn
+```bash
+git clone https://github.com/your/repository.git
+cd fragenbogen
+yarn
+```
 
-3. Start the development server: yarn start
+2. Start the development server:
+
+```bash
+yarn start
+```
 
 ### Technologies Used
 
@@ -24,6 +31,12 @@ This web app allows users to answer questions in multiple iterations, with the a
 - CSS
 - Local Storage
 
-### Project Tested with Playwright for End-to-End Testing
+### This project has been tested using Playwright
 
-To run the tests: yarn playwright test
+Playwright enables us to automate tests and validate the behavior of our web application.
+
+To run the tests:
+
+```bash
+yarn playwright test
+```
