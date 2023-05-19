@@ -39,11 +39,15 @@
   color: #fff;
   padding: 20px;
   text-align: center;
+  margin-top: auto;
+  width: 100%;
 }
 
 .footer span {
   font-size: 0.93rem;
   font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 30px;
 }
 
 /* main */
@@ -53,7 +57,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 4rem;
-  height: 90vh;
+  height: 100vh;
 }
 
 .mainpage h1 {
@@ -95,14 +99,14 @@
 }
 
 .answers-btn {
-  padding: 8px 16px;
+  padding: 8px 10px;
   background-color: #5762d5;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  margin-right: 1rem;
+  margin-top: 1rem;
 }
 
 .answers-btn:hover {
@@ -128,10 +132,26 @@
 
 .input {
   width: 100%;
-  padding: 6px;
+  padding: 12px;
   font-size: 16px;
   margin-top: 0.4rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: none;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+  border-radius: 4px;
 }
+
+.input:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-input {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
 .btn {
   padding: 8px 16px;
   font-size: 1rem;
@@ -143,7 +163,7 @@
   margin: 0.6rem;
   border-radius: 0.5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .btn:disabled {
@@ -190,20 +210,58 @@
 }
 
 .next-btn {
-  padding: 8px 16px;
+  padding: 9px 16px;
   font-size: 1rem;
   background-color: #5762d5;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin: 0.6rem;
+  margin: 0.8rem;
   border-radius: 0.5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-left: 1rem;
 }
 
 .link-btn {
-  margin-top: 80px;
+  margin-top: 20rem;
   display: flex;
   flex-direction: row;
+}
+
+.question-text {
+  margin-top: 1.5rem;
+}
+
+.answer-section {
+  margin-top: 1.5rem;
+}
+
+/* Media Query */
+
+@media (max-width: 768px) {
+  .link-btn {
+    margin-top: 10rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .newIterationPage h1 {
+    margin: 2rem 0 1rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .question-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: normal;
+  }
+}
+
+@media (max-width: 768px) {
+  .answer-section {
+    margin-left: 1rem;
+  }
 }
